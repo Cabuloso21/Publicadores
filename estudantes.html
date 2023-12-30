@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estudantes</title>
+</head>
+<body>
+  
+<style>
+ 
+ body {
+ font-family: Arial, sans-serif;
+ margin: 0;
+ padding: 0;
+ background-color: white;
+   
+}
+  
+ .arrow {
+ display: inline-block;
+ width: 10px;
+ height: 10px;
+ border-top: 2px solid black;
+ border-right: 2px solid black;
+ transform: rotate(-130deg);
+ position: absolute;
+ top: 25px;
+ left: 15px;
+}
+
+ header {
+ background-color: #cc1;
+ padding: 20px;
+ text-align: center;
+   
+}   
+
+ h1 {
+ margin: 0;
+ margin-top: 0px;
+ font-size: 22px;
+ color: black;
+      
+}
+
+ #addCategory {
+ background-color: #cc2;
+ color: black;
+ padding: 12px 20px;
+ border: none;
+ border-radius: 10px;
+ cursor: pointer;
+ margin-left: 15px;
+ margin-top: 5px;
+ font-size: 15px;
+ font-weight: bold;
+      
+}
+  
+ #addCategory:hover {
+ background-color: #cc2;
+      
+}
+
+ #searchCategory {
+ padding: 12px;
+ margin-left: 10px;
+ border: 1px solid #ccc;
+ border-radius: 4px;
+   
+}
+
+ #categoriesContainer > div {
+ border: 1px solid #ccc;
+ border-radius: 5px;
+ position: center;
+ flex-wrap: wrap;
+ padding: 10px;
+ margin-top: 50px;
+ background: white;
+ border-radius: 5px;
+ box-shadow:  0 2px 10px rgba(0, 0, 0, 0.2);
+   
+}
+  
+ #categoriesContainer > div h3 {
+ font-size: 22px;
+ padding: 5px;
+ margin-top: 1px;
+ color: black;
+ border-bottom: none px solid #cc1;
+  
+}
+
+  
+ #categoriesContainer > div p {
+ font-size: 17px;
+ margin-top: 0px;
+ color: black;
+ font-weight: bold;
+ padding: 1px;
+ 
+}
+
+ input[type="number"] {
+ width: 40%;
+ margin-top: 1px;
+ padding: 10px;
+ border: 1px solid #ccc;
+ border-radius: 4px;
+ margin-bottom: 35px;
+ margin-left: 0px;
+        
+}
+
+.delete-button {
+ color: #f00;
+ cursor: pointer;
+ font-size: 15px;
+ font-weight: bold;
+ margin-left: 10px;
+      
+}
+
+.delete-button:hover {
+ text-decoration: underline;
+  
+}
+
+ button {
+ background-color: #cc2;
+ color: black;
+ padding: 10px 10px;
+ border: none;
+ border-radius: 50px;
+ cursor: pointer;
+ margin-left: 180px;
+ font-size: 15px;
+ font-weight: bold;
+ margin-bottom: 10px;
+      
+}
+
+ button:hover {
+ background-color: none;
+   
+}
+
+  
+ label {
+ margin: 10px;
+ color: black;
+ font-size: 17px;
+ font-weight: bold;
+  
+}
+  
+ #categoriesContainer> div input[type="text"] {
+ padding: 10px;
+ width: 300px;
+ margin: 5px;
+ border: none;
+ border-radius: none;
+ font-size: 16px;
+ border-bottom: 1.50px solid #ccc;
+ margin-bottom: 30px;
+   
+} 
+  
+</style>
+
+  
+<a href="index.html">
+<span class="arrow"></span>
+</a>
+</div>
+  
+<header>
+<h1>Meus estudantes</h1>
+</header>
+
+<script defer src="estudante.js"></script>
+</head>
+<body>
+
+<button id="addCategory">Adicionar</button>
+<input type="text" id="searchCategory" placeholder="Pesquisar estudante" oninput="searchCategories()">
+    
+<div id="categoriesContainer"></div>
+
+
+<script>
+const addButton = document.getElementById('addCategory');
+const searchInput = document.getElementById('searchCategory');
+
+const categoriesContainer = document.getElementById('categoriesContainer');
+
+  
+// Carregar categorias do localStorage ao carregar a página
+window.addEventListener('load', loadCategories);
+
+addButton.addEventListener('click', showCategoryMessage);
+
+function loadCategories() {
+const savedCategories = JSON.parse(localStorage.getItem('categories')) || [];
+savedCategories.forEach((categoryData) => {
+createCategory(categoryData);
+ });
+}
+
+function showCategoryMessage() {
+const categoryName = prompt("Nome do Estudante:");
+if (categoryName) {
+const categoryData = {
+name: categoryName,
+description: "Contato",
+livro: "",
+tema: "",
+capitulo: "",
+proximoEstudo: "",
+dia: "",
+horario: "",
+phoneNumber: "",
+};
+
+createCategory(categoryData);
+saveCategories();
+ }
+}
+
+function createCategory(categoryData) {
+const categoryDiv = document.createElement('div');
+categoryDiv.innerHTML = `
+                
+<h3 contenteditable="true" oninput="saveCategories()">${categoryData.name}</h3>
+<p contenteditable="true" oninput="saveCategories()">${categoryData.description}</p>
+<input type="number" placeholder="Número do WhatsApp" value="${categoryData.phoneNumber}" oninput="saveCategoriesPhoneNumber(this)">
+<div>
+<label for="livro">Livro de estudo:</label>
+<input type="text" id="livro" value="${categoryData.livro}" oninput="updateCategoryField(this, 'livro')">
+</div>
+<div>
+<label for="tema">Capitulo:</label>
+<input type="text" id="tema" value="${categoryData.tema}" oninput="updateCategoryField(this, 'tema')">
+</div>
+<div>
+<label for="capitulo">Lição:</label>
+<input type="text" id="capitulo" value="${categoryData.capitulo}" oninput="updateCategoryField(this, 'capitulo')">
+</div>
+<div>
+<label for="proximoEstudo">Próximo estudo:</label>
+<input type="text" id="proximoEstudo" value="${categoryData.proximoEstudo}" oninput="updateCategoryField(this, 'proximoEstudo')">
+</div>
+<div>
+<label for="dia">Dia:</label>
+<input type="text" id="dia" value="${categoryData.dia}" oninput="updateCategoryField(this, 'dia')">
+</div>
+<div>
+                    
+<label for="horario">Horario:</label>
+<input type="text" id="horario" value="${categoryData.horario}" oninput="formatHora(this)">
+
+</div>
+<span class="delete-button" onclick="deleteCategory(this)">Excluir</span>
+<button onclick="redirectToWhatsApp(this)">Conversar</button>
+`;
+
+categoriesContainer.appendChild(categoryDiv);
+}
+
+function saveCategoriesPhoneNumber(input) {
+const categoryDiv = input.parentElement;
+const categoryName = categoryDiv.querySelector('h3').textContent;
+const phoneNumber = input.value;
+updateCategoryField(categoryName, 'phoneNumber', phoneNumber);
+}
+
+function deleteCategory(deleteButton) {
+const categoryDiv = deleteButton.parentElement;
+categoryDiv.remove();
+saveCategories();
+}
+
+function updateCategoryField(categoryName, field, value) {
+const savedCategories = JSON.parse(localStorage.getItem('categories')) || [];
+const updatedCategories = savedCategories.map((category) => {
+if (category.name === categoryName) {
+category[field] = value;
+}
+
+return category;
+});
+      
+localStorage.setItem('categories', JSON.stringify(updatedCategories));
+saveCategories();
+}
+
+function saveCategories() {
+const categories = Array.from(categoriesContainer.children);
+const categoriesData = categories.map((category) => ({
+name: category.querySelector('h3').textContent,
+description: category.querySelector('p').textContent,
+phoneNumber: category.querySelector('input[type="number"]').value,
+livro: category.querySelector('#livro').value,
+tema: category.querySelector('#tema').value,
+capitulo: category.querySelector('#capitulo').value,
+proximoEstudo: category.querySelector('#proximoEstudo').value,
+dia: category.querySelector('#dia').value,
+horario: category.querySelector('#horario').value,
+}));
+
+localStorage.setItem('categories', JSON.stringify(categoriesData));
+}
+
+function redirectToWhatsApp(button) {
+const categoryDiv = button.parentElement;
+const categoryName = categoryDiv.querySelector('h3').textContent;
+const savedCategories = JSON.parse(localStorage.getItem('categories')) || [];
+const categoryData = savedCategories.find(category => category.name === categoryName);
+
+if (categoryData) {
+const phoneNumber = categoryData.phoneNumber;
+if (phoneNumber) {
+  
+window.location.href = `https://api.whatsapp.com/send?phone=${phoneNumber}`;
+} else {
+
+alert("Para conversar com seu estudante, adicione o número do WhatsApp dele.");
+   }
+ }
+}
+
+function searchCategories() {
+const searchTerm = searchInput.value.toLowerCase();
+const categories = categoriesContainer.children;
+
+for (let i = 0; i < categories.length; i++) {
+const category = categories[i];
+const categoryName = category.querySelector('h3').textContent.toLowerCase();
+
+if (categoryName.includes(searchTerm)) {
+category.style.display = 'block';
+} else {
+category.style.display = 'none';
+    }
+  }
+}
+
+
+function formatHora(input) {
+const hora = input.value;
+if (hora.length === 2 && hora.indexOf(':') === -1) {
+input.value = hora + ':00';
+ }
+saveCategories(); // Altere de saveHorario() para saveCategories()
+ }
+    
+    
+function saveHorario() {
+const horarioInput = document.getElementById("horario");
+const horario = horarioInput.value;
+
+// Use o localStorage para armazenar a hora
+localStorage.setItem("horario", horario);
+}
+
+function loadHorario() {
+const horarioSaved = localStorage.getItem("horario");
+if (horarioSaved) {
+document.getElementById("horario").value = horarioSaved;
+ }
+}
+
+document.getElementById("horario").addEventListener("input", formatHora);
+loadHorario();
+
+</script>
+  
+
+
+
+
+ 

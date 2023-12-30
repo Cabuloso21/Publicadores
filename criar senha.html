@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página Protegida por Senha</title>
+</head>
+<body>
+    
+  <style>
+  
+  input {
+  padding: 10px;
+  border-radius: 5px;
+ }
+  
+  button {
+  background: red;
+  border-radius: 10px;
+  margin-top: 50px;
+  padding: 10px; 
+    
+}
+ </style>
+  
+  
+  <h2>Cria senha de acesso</h2>
+
+<div class="text">Lembre-se dessa senha, pois ela sera usada para que você possa
+  acessar sua pagina de administrador. se você esqueçer dela, não será possivel recupera-la.</div>
+    
+
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Página Protegida por Senha</title>
+</head>
+<body>
+    <h1>Defina sua senha:</h1>
+    <input type="password" id="newPassword">
+    <button onclick="setPassword()">Definir Senha</button>
+
+    <h1>Insira a senha para acessar:</h1>
+    <input type="password" id="password">
+    <button onclick="checkPassword()">Acessar</button>
+
+    <p id="message"></p>
+
+    <script src="script.js"></script>
+
+<script>
+ 
+var savedPassword = localStorage.getItem("password");
+var passwordInput = document.getElementById("password");
+
+// Oculta o campo de senha inicialmente
+passwordInput.style.display = savedPassword ? "block" : "none";
+
+function setPassword() {
+    var newPasswordInput = document.getElementById("newPassword");
+    var message = document.getElementById("message");
+
+    var newPassword = newPasswordInput.value;
+
+    if (newPassword) {
+        // Armazena a senha definida no armazenamento local (pode ser aprimorado para um banco de dados mais seguro)
+        localStorage.setItem("password", newPassword);
+        message.textContent = "Senha definida com sucesso.";
+
+        // Exibe o campo de senha após a definição
+        passwordInput.style.display = "block";
+    } else {
+        message.textContent = "A senha não pode estar em branco.";
+    }
+}
+
+function checkPassword() {
+    var message = document.getElementById("message");
+    var enteredPassword = passwordInput.value;
+
+    if (!savedPassword || enteredPassword === savedPassword) {
+        // Se não houver senha definida ou a senha for correta, redirecionar para a página protegida
+        window.location.href = "index.html";
+    } else {
+        message.textContent = "Senha incorreta. Tente novamente.";
+    }
+}
+</script>

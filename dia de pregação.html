@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estudantes</title>
+</head>
+<body>
+  
+  
+  
+    
+  
+  
+  <style>
+  
+  
+  
+  
+ .arrow {
+ display: inline-block;
+ width: 10px;
+ height: 10px;
+ border-top: 2px solid #333;
+ border-right: 2px solid #333;
+ transform: rotate(-130deg);
+ position: absolute;
+ top: 25px;
+ left: 15px;
+}
+
+
+  
+  
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: white;
+    }
+
+    header {
+        background-color: #cc1;
+        color: black;
+        padding: 20px;
+        text-align: center;
+    }   
+
+    h1 {
+        margin: 0;
+        margin-top: 0px;
+        font-size: 22px;
+      
+      
+    }
+
+    #addCategory {
+        background-color: #cc2;
+        color: black;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-left: 15px;
+        margin-top: 5px;
+        
+        font-size: 15px;
+        font-weight: bold;
+      
+    }
+
+    #addCategory:hover {
+        background-color: #cc2;
+      
+      
+      
+      
+    }
+
+  
+    #searchCategory {
+        padding: 12px;
+        margin-left: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+  
+  
+ 
+  
+
+ 
+  
+  
+  
+   #categoriesContainer > div {
+       
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  position: center;
+  flex-wrap: wrap;
+  padding: 10px;
+  margin-top: 50px;
+  background: white;
+  border-radius: 5px;
+
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+      
+      
+      
+   }
+      
+      
+
+    
+  #categoriesContainer > div h3 {
+  font-size: 20px;
+  padding: 5px;
+  margin-top: 1px;
+  color: black;
+  border-bottom: none px solid #cc1;
+  
+}
+
+  
+  #categoriesContainer > div p {
+  font-size: 17px;
+  margin-top: 0px;
+  color: maroon;
+  font-weight: bold;
+  padding: 1px;
+ 
+}
+
+    
+
+    input[type="number"] {
+        width: 40%;
+        margin-top: 1px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 35px;
+        margin-left: 0px;
+      
+    }
+
+    .delete-button {
+        color: #f00;
+        cursor: pointer;
+         font-size: 15px;
+          font-weight: bold;
+          margin-left: 10px;
+      
+    }
+
+    .delete-button:hover {
+        text-decoration: underline;
+      
+      
+      
+    }
+
+    button {
+        background-color: #cc2;
+        color: black;
+        padding: 10px 10px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        margin-left: 180px;
+        font-size: 15px;
+        font-weight: bold;
+      
+      
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+  
+  label {
+  margin: 0px;
+  color: black;
+  font-size: 17px;
+  font-weight: bold;
+  
+}
+
+
+
+  
+ 
+  
+  
+ #categoriesContainer> div input[type="text"] {
+   padding: 10px;
+   width: 300px;
+   margin: 5px;
+  border: none;
+  border-radius: none;
+  font-size: 16px;
+  border-bottom: 1.50px solid #ccc;
+  margin-bottom: 30px;
+   
+ } 
+  
+  </style>
+
+  
+  <a href="index.html">
+<span class="arrow"></span>
+ </a>
+</div>
+  
+  
+
+  
+  
+ 
+ 
+
+  
+ 
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+    
+
+
+
+
+
+    <!DOCTYPE html>
+<html>
+<head>
+    <title>Estudantes</title>
+</head>
+<body>
+
+    <header>
+        <h1>Pregação</h1>
+    </header>
+
+    <button id="addCategory">Adicionar</button>
+    <input type="text" id="searchCategory" placeholder="Pesquisar por nome" oninput="searchCategories()">
+
+    <div id="categoriesContainer"></div>
+
+    
+  <script>
+    const addButton = document.getElementById('addCategory');
+    const categoriesContainer = document.getElementById('categoriesContainer');
+
+    // Obtenha a chave única da página a partir da URL ou de alguma outra fonte
+    const pageKey = 'pagina3'; // Altere isso para a chave da página atual
+
+    // Carregar categorias do localStorage ao carregar a página
+    window.addEventListener('load', loadCategories);
+
+    addButton.addEventListener('click', showCategoryMessage);
+
+    function loadCategories() {
+      const savedCategories = JSON.parse(localStorage.getItem(pageKey)) || [];
+      savedCategories.forEach((categoryData) => {
+        createCategory(categoryData);
+      });
+    }
+
+    function showCategoryMessage() {
+      const categoryName = prompt("     NOME:");
+      if (categoryName) {
+        const categoryData = {
+          name: categoryName,
+          marca: "",
+          tamanho: "",
+          cor: "",
+          valor: "",
+          
+          
+        };
+        createCategory(categoryData);
+        saveCategories();
+      }
+    }
+
+    function createCategory(categoryData) {
+      const categoryDiv = document.createElement('div');
+      const categoryName = categoryData.name;
+
+      categoryDiv.innerHTML = `
+        
+      <!-- Adicione o restante do conteúdo aqui -->
+      
+      <h3 contenteditable="true" oninput="saveCategories()">${categoryData.name}</h3>
+      </div>
+
+
+    
+        
+     <label for="marca">Dia:</label>
+      <input type="text" id="marca" value="${categoryData.marca}" oninput="updateCategoryField(this, 'marca', '${categoryData.marca}')">
+    </div>
+      
+      <label for="tamanho">Horario:</label>
+      <input type="text" id="tamanho" value="${categoryData.tamanho}" oninput="updateCategoryField(this, 'tamanho', '${categoryData.tamanho}')">
+      </div>
+          
+      <label for="cor">Falar sobre:</label>
+      <input type="text" id="cor" value="${categoryData.cor}" oninput="updateCategoryField(this, 'cor', '${categoryData.cor}')">
+         </div>
+
+ <label for="valor">Texto:</label>
+       <input type="text" id="valor" value="${categoryData.valor}" oninput="updateCategoryField(this, 'valor', '${categoryData.valor}')">
+        </div>  
+
+
+
+    
+     </div>
+          <span class="delete-button" onclick="deleteCategory(this, '${categoryData.name}')">Excluir</span>
+        </div>
+    
+    `;
+        
+      
+      categoriesContainer.appendChild(categoryDiv);
+    }
+
+    
+
+
+
+function deleteCategory(deleteButton, categoryName) {
+      const categoryDiv = deleteButton.parentElement;
+      categoryDiv.remove();
+      saveCategories(categoryName, true);
+    }
+
+    function updateCategoryField(input, field, categoryName) {
+      saveCategories(categoryName, false);
+    }
+
+
+
+
+
+
+
+
+
+function saveCategories() {
+      const categories = Array.from(categoriesContainer.children);
+      const categoriesData = categories.map((category) => {
+        return {
+          name: category.querySelector('h3').textContent,
+          
+          marca: category.querySelector('#marca').value,
+          tamanho: category.querySelector('#tamanho').value,
+          cor: category.querySelector('#cor').value,
+          
+          valor: category.querySelector('#valor').value,
+          
+          
+          
+              
+          // Adicione outros campos aqui
+        };
+      });
+
+      localStorage.setItem(pageKey, JSON.stringify(categoriesData));
+    }
+
+
+
+
+
+function selecionarImagem(categoryName) {
+  const imagemInput = document.getElementById(`imagemInput-${categoryName}`);
+  imagemInput.addEventListener('change', function (event) {
+    const imagem = event.target.files[0];
+    if (imagem) {
+      const imagemPreview = document.getElementById(`logo-${categoryName}`);
+
+      if (imagem.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          imagemPreview.src = e.target.result;
+        };
+        reader.readAsDataURL(imagem);
+      } else {
+        alert('Selecione um arquivo de imagem válido.');
+      }
+    }
+  });
+
+  // Simular um clique no input de imagem para abrir o diálogo de seleção de arquivo
+  imagemInput.click();
+}
+
+</script>
+</body>
+</html>
+  

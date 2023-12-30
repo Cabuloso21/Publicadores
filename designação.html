@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .arrow {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid black;
+            border-right: 2px solid black;
+            transform: rotate(-130deg);
+            position: absolute;
+            top: 25px;
+            left: 15px;
+        }
+
+        * {
+            margin: 0;
+        }
+
+        .header {
+            background-color: #cc3;
+            padding: 20px;
+            border-bottom: 1.50px solid White;
+        }
+
+        .header-title {
+            color: black;
+            text-align: center;
+            font-size: 22px;
+            
+        }
+
+        form {
+            margin: 20px;
+            
+          
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+            color: black;
+            margin: 6px;
+            
+          
+        }
+
+        input[type="text"] {
+            width: 200px;
+            padding: 14px;
+            margin-bottom: 6px;
+            border-radius: 10px;
+            border-color: #cc1;
+            font-size: 16px;
+          border: 1px solid #cc4;
+        }
+
+  
+         input {
+         color: black;
+         
+           
+         }
+  
+  
+  
+  
+  
+  
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+             font-weight: bold;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            color: White;
+            background-color: orange;
+        }
+  
+  
+ .subtitulo {
+  color: black;
+   font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+ }
+  
+  
+  
+    </style>
+</head>
+
+
+<a href="index.html">
+<span class="arrow"></span>
+ </a>
+</div>
+
+
+ <div class="header">
+    <h2 class="header-title">Minha designacão</h2>
+</div>
+<form>
+   
+  
+  
+
+
+
+    <label for="nome">Designação:</label>
+    <input type="text" id="nome" name="nome"><br><br>
+
+    <label for="data">Data:</label>
+    <input type="text" id="data" name="data"><br><br>
+
+    <label for="texto">Texto:</label>
+    <input type="text" id="texto" name="texto"><br><br>
+
+    <label for="ajudante">Ajudante:</label>
+    <input type="text" id="ajudante" name="ajudante"><br><br>
+</form>
+
+<script>
+    // Carregar informações salvas no localStorage
+    document.getElementById("nome").value = localStorage.getItem("nome") || "";
+    document.getElementById("data").value = localStorage.getItem("data") || "";
+    document.getElementById("texto").value = localStorage.getItem("texto") || "";
+    document.getElementById("ajudante").value = localStorage.getItem("ajudante") || "";
+
+    // Adicionar ouvinte de eventos para detectar mudanças nos campos de entrada
+    document.getElementById("nome").addEventListener("input", function () {
+        localStorage.setItem("nome", this.value);
+    });
+
+    document.getElementById("data").addEventListener("input", function () {
+        localStorage.setItem("data", this.value);
+    });
+
+    document.getElementById("texto").addEventListener("input", function () {
+        localStorage.setItem("texto", this.value);
+    });
+
+    document.getElementById("ajudante").addEventListener("input", function () {
+        localStorage.setItem("ajudante", this.value);
+    });
+</script>
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Bloco de Notas</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    
+    
+    <div class="subtitulo">Assunto:</div>
+    
+    
+    
+    
+    
+    <style>
+    
+    
+    /* Estilização para ocupar a tela inteira do celular */
+#notepad {
+  
+  height: 200vh; /* 100% da altura da janela de visualização */
+  margin: 6px;
+  
+  
+  
+}
+
+    
+    
+ input[type="number"] {
+            width: 90px;
+            padding: 14px;
+            margin-bottom: 6px;
+            border-radius: 10px;
+            border-color: #cc1;
+            font-size: 16px;
+          border: 1px solid #cc4;
+        }
+  
+    
+  
+  
+
+
+/* Style the header */
+h1 {
+  text-align: center;
+  font-size: 250px;
+  color: red;
+  
+}
+
+/* Style the text area */
+#text-area {
+  width: 343px;
+  height: 600px;
+  margin-top: 10px;
+  border: 1px solid #cc1;
+  border-radius: 1px;
+  font-size: 15px;
+  possition: absolute;
+  outline: none;
+
+  
+}
+/* Style the buttons */
+#buttons {
+  text-align: absolute;
+ 
+  
+}
+
+#buttons button {
+  
+  padding: 10px 10px;
+  background-color: #ff6534;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+#buttons button:hover {
+  background-color: #ff6534;
+}
+
+/* Style the saved notes list */
+#saved-notes {
+  list-style: none;
+  padding: 0;
+}
+
+#saved-notes li {
+  background-color: #fff;
+  
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+
+    
+    
+    
+    
+    
+    
+    #buttons {
+  text-align: absolute; /* Centraliza os botões horizontalmente */
+}
+
+#buttons button {
+  display: inline-block; /* Faz com que os botões fiquem um ao lado do outro */
+   margin-right: 0px; /* Adiciona um espaço entre os botões */
+  margin-left: 10px;
+  
+}  
+  
+ .green-overlay {
+  background-color: red;
+  color: #ff6534;
+}
+  
+
+
+    
+    </style>  
+    
+    
+
+  
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notepad</title>
+</head>
+<body>
+
+<div id="notepad">
+  <textarea id="text-area"></textarea>
+  <input type="number" id="whatsapp-number" placeholder="Whatsapp">
+  <div id="buttons">
+    <button id="save-btn">Salvar</button>
+    <button id="delete-btn">Excluir</button>
+    <button id="send-to-whatsapp-btn">Enviar para o ajudante</button> <!-- Novo botão -->
+  </div>
+  <ul id="saved-notes"></ul>
+</div>
+
+  
+  
+<script src="script.js"></script>
+
+<script>
+// selecionando os elementos do DOM
+const textArea = document.getElementById('text-area');
+const saveBtn = document.getElementById('save-btn');
+const deleteBtn = document.getElementById('delete-btn');
+const savedNotes = document.getElementById('saved-notes');
+
+// variáveis globais
+let notes = [];
+let currentNoteIndex = null;
+
+// função para adicionar notas salvas na lista
+function addSavedNoteToList(note, index) {
+  const li = document.createElement('li');
+  const p = document.createElement('p');
+  p.innerText = note;
+  li.appendChild(p);
+  savedNotes.appendChild(li);
+
+  // Adiciona um listener para o clique na nota
+  li.addEventListener('click', () => {
+    selectNote(index);
+  });
+}
+
+// função para atualizar a lista de notas salvas
+function updateSavedNotesList() {
+  savedNotes.innerHTML = '';
+  notes.forEach((note, index) => {
+    addSavedNoteToList(note, index);
+  });
+}
+
+// função para salvar a nota atual
+function saveNote() {
+  if (textArea.value !== '') {
+    if (currentNoteIndex === null) {
+      notes.push(textArea.value);
+    } else {
+      notes[currentNoteIndex] = textArea.value;
+    }
+    currentNoteIndex = null;
+    textArea.value = '';
+    updateSavedNotesList();
+    saveNotesLocally(); // Salva as notas no armazenamento local após cada alteração
+  }
+}
+
+// função para excluir a nota atual
+function deleteNote() {
+  if (currentNoteIndex !== null) {
+    notes.splice(currentNoteIndex, 1);
+    currentNoteIndex = null;
+    textArea.value = '';
+    updateSavedNotesList();
+    saveNotesLocally(); // Salva as notas no armazenamento local após cada alteração
+  }
+}
+
+// função para escolher a nota
+function selectNote(index) {
+  // Remove a classe 'green-overlay' de todas as notas
+  const allNotes = document.querySelectorAll('#saved-notes li');
+  allNotes.forEach((note) => {
+    note.classList.remove('green-overlay');
+  });
+
+  // Adiciona a classe 'green-overlay' à nota clicada
+  allNotes[index].classList.add('green-overlay');
+
+  // Atualiza o índice da nota atual
+  currentNoteIndex = index;
+  textArea.value = notes[index];
+}
+
+// Evento de clique no botão "Salvar"
+saveBtn.addEventListener('click', saveNote);
+
+// Evento de clique no botão "Excluir"
+deleteBtn.addEventListener('click', deleteNote);
+
+// Função para salvar as notas no armazenamento local
+function saveNotesLocally() {
+  localStorage.setItem('notes', JSON.stringify(notes));
+}
+
+// Função para carregar as notas do armazenamento local
+function loadNotesLocally() {
+  const savedNotesJSON = localStorage.getItem('notes');
+  if (savedNotesJSON) {
+    notes = JSON.parse(savedNotesJSON);
+    updateSavedNotesList();
+  }
+}
+
+// Carregando as notas salvas do armazenamento local ao carregar a página
+loadNotesLocally();
+
+
+
+
+
+// Novo evento de clique no botão "Enviar para o WhatsApp"
+const sendToWhatsAppBtn = document.getElementById('send-to-whatsapp-btn');
+sendToWhatsAppBtn.addEventListener('click', sendNoteToWhatsApp);
+
+// Função para enviar a nota escolhida via WhatsApp
+function sendNoteToWhatsApp() {
+  if (currentNoteIndex !== null) {
+    const whatsappNumber = document.getElementById('whatsapp-number').value;
+    if (whatsappNumber !== '') {
+      const encodedNote = encodeURIComponent(notes[currentNoteIndex]);
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedNote}`;
+      window.open(whatsappUrl);
+    } else {
+      alert('Por favor, insira o número do WhatsApp antes de enviar.');
+    }
+  }
+}
+
+
+
+
+</script>
+
+
+
+
+
+
+

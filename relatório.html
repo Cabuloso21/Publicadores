@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .arrow {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid black;
+            border-right: 2px solid black;
+            transform: rotate(-130deg);
+            position: absolute;
+            top: 25px;
+            left: 15px;
+        }
+
+        * {
+            margin: 0;
+        }
+
+        .header {
+            background-color: #cc3;
+            padding: 20px;
+            border-bottom: 1.50px solid White;
+        }
+
+        .header-title {
+            color: black;
+            text-align: center;
+            font-size: 22px;
+          
+        }
+
+        form {
+            margin: 20px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+            color: black;
+            margin: 6px;
+            
+          
+        }
+
+        input[type="text"] {
+            width: 200px;
+            padding: 14px;
+            margin-bottom: 6px;
+            border: 1px solid #cc1;
+            border-radius: 10px;
+            font-size: 16px;
+          
+        }
+
+  
+         input {
+         color: black;
+         
+           
+         }
+  
+  
+  
+  
+  
+  
+        button {
+            display: block;
+            margin: 10px auto;
+            margin-bottom: 50px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            color: white;
+            background-color: #ff6534;
+          
+          
+        }
+  
+  
+  input[type="number"] {
+  
+   width: 200px;
+   padding: 14px;
+   margin-bottom: 10px;
+   border-radius: 10px;
+   border: 1px solid #cc4;
+   font-size: 16px;
+    
+  }
+    </style>
+</head>
+
+
+<a href="index.html">
+<span class="arrow"></span>
+ </a>
+</div>
+
+
+ <div class="header">
+    <h2 class="header-title">Meu relatorio</h2>
+</div>
+<form>
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome"><br><br>
+
+  <label for="pregação">Participou na pregação:</label>
+    <input type="text" id="pregação" name="pregação"><br><br>
+
+  
+  
+    <label for="estudo">Estudos:</label>
+    <input type="number" id="estudo" name="estudo"><br><br>
+
+ 
+  
+    <label for "whatsapp">WhatsApp do responsável:</label>
+    <input type="number" id="whatsapp" name="whatsapp"><br><br>
+
+    <button type="button" onclick="enviarWhatsapp()">Enviar relatório</button>
+</form>
+
+<script>
+    function pageKey() {
+        // Defina uma chave exclusiva para cada página
+        return 'pagina1';
+    }
+
+    // Use a chave exclusiva para armazenar e recuperar informações no localStorage
+    var uniqueKey = pageKey();
+
+    // Carregar informações salvas no localStorage
+    document.getElementById("nome").value = localStorage.getItem(uniqueKey + "_nome") || "";
+    
+    document.getElementById("pregação").value = localStorage.getItem(uniqueKey + "_pregação") || "";
+
+document.getElementById("estudo").value = localStorage.getItem(uniqueKey + "_estudo") || "";
+
+    
+    document.getElementById("whatsapp").value = localStorage.getItem(uniqueKey + "_whatsapp") || "";
+
+    function enviarWhatsapp() {
+        var nome = document.getElementById("nome").value;
+        var pregação = document.getElementById("pregação").value;
+        var estudo = document.getElementById("estudo").value; 
+  
+        var numeroWhatsapp = document.getElementById("whatsapp").value;
+
+        // Salvar as informações no localStorage com base na chave exclusiva
+        localStorage.setItem(uniqueKey + "_nome", nome);
+        localStorage.setItem(uniqueKey + "_pregação", pregação);
+      
+      localStorage.setItem(uniqueKey + "_estudo", estudo);
+      
+        localStorage.setItem(uniqueKey + "_whatsapp", numeroWhatsapp);
+
+        var mensagem = "Nome: " + nome + "%0APregação: " + pregação + "%0AEstudo: " + estudo;   
+
+        // Verifique se um número do WhatsApp foi fornecido
+        if (numeroWhatsapp) {
+            window.open("https://wa.me/" + numeroWhatsapp + "?text=" + mensagem);
+        } else {
+            alert("Por favor, insira o número do Whatsapp do responsável.");
+        }
+    }
+
+    // Adicionar ouvinte de eventos para detectar mudanças nos campos de entrada
+    document.getElementById("nome").addEventListener("input", function () {
+        localStorage.setItem(uniqueKey + "_nome", this.value);
+    });
+    document.getElementById("pregação").addEventListener("input", function () {
+        localStorage.setItem(uniqueKey + "_pregação", this.value);
+      
+      });
+    document.getElementById("estudo").addEventListener("input", function () {
+        localStorage.setItem(uniqueKey + "_estudo", this.value);
+      
+      
+    });
+    document.getElementById("whatsapp").addEventListener("input", function () {
+        localStorage.setItem(uniqueKey + "_whatsapp", this.value);
+    });
+</script>
+
+
+
+

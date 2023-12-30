@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estudantes</title>
+</head>
+<body>
+  
+<style>
+ 
+ .arrow {
+ display: inline-block;
+ width: 10px;
+ height: 10px;
+ border-top: 2px solid black;
+ border-right: 2px solid black;
+ transform: rotate(-130deg);
+ position: absolute;
+ top: 25px;
+ left: 15px;
+}
+
+
+  
+  
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: white;
+    }
+
+    header {
+        background-color: #cc1;
+        padding: 20px;
+        text-align: center;
+    }   
+
+    h1 {
+        margin: 0;
+        margin-top: 0px;
+        font-size: 22px;
+        color: black;
+      
+    }
+
+    #addCategory {
+        background-color: #cc2;
+        color: black;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-left: 15px;
+        margin-top: 5px;
+        
+        font-size: 15px;
+        font-weight: bold;
+      
+    }
+
+    #addCategory:hover {
+        background-color: #cc2;
+      
+      
+      
+      
+    }
+
+  
+    #searchCategory {
+        padding: 12px;
+        margin-left: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+  
+  
+ 
+  
+
+ 
+  
+  
+  
+   #categoriesContainer > div {
+       
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  position: center;
+  flex-wrap: wrap;
+  padding: 10px;
+  margin-top: 50px;
+  background: white;
+  border-radius: 5px;
+
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+      
+      
+      
+   }
+      
+      
+
+    
+  #categoriesContainer > div h3 {
+  font-size: 22px;
+  padding: 5px;
+  margin-top: 1px;
+  color: black;
+  border-bottom: none px solid #cc1;
+  
+}
+
+  
+  #categoriesContainer > div p {
+  font-size: 17px;
+  margin-top: 0px;
+  color: black;
+  font-weight: bold;
+  padding: 1px;
+ 
+}
+
+    
+
+    input[type="number"] {
+        width: 40%;
+        margin-top: 1px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 35px;
+        margin-left: 0px;
+        
+    }
+
+    .delete-button {
+        color: #f00;
+        cursor: pointer;
+         font-size: 15px;
+          font-weight: bold;
+          margin-left: 10px;
+      
+    }
+
+    .delete-button:hover {
+        text-decoration: underline;
+      
+      
+      
+    }
+
+    button {
+        background-color: #cc2;
+        color: black;
+        padding: 10px 10px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        margin-left: 180px;
+        font-size: 15px;
+        font-weight: bold;
+      margin-bottom: 10px;
+      
+    }
+
+    button:hover {
+        background-color: none;
+    }
+
+  
+  label {
+  margin: 10px;
+  color: black;
+  font-size: 17px;
+  font-weight: bold;
+  
+}
+
+
+
+  
+ 
+  
+  
+ #categoriesContainer> div input[type="text"] {
+   padding: 10px;
+   width: 300px;
+   margin: 5px;
+  border: none;
+  border-radius: none;
+  font-size: 16px;
+  border-bottom: 1.50px solid #ccc;
+  margin-bottom: 30px;
+   
+ } 
+  
+</style>
+
+  
+<a href="index.html">
+<span class="arrow"></span>
+</a>
+</div>
+  
+<header>
+<h1>Meus estudantes</h1>
+</header>
+
+<script defer src="estudante.js"></script>
+</head>
+<body>
+
+<button id="addCategory">Adicionar</button>
+<input type="text" id="searchCategory" placeholder="Pesquisar estudante" oninput="searchCategories()">
+    
+<div id="categoriesContainer"></div>
+
+  
+  
+  
+  
+
+
+
+
+ 
