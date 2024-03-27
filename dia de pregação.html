@@ -1,117 +1,68 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Estudantes</title>
-</head>
-<body>
-  
-  
-  
-    
-  
-  
-  <style>
-  
-  
-  
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Exemplo de Grid Flexível</title>
+ <link rel="stylesheet" href="styles.css">
+ </head>
+ <body>
+ 
+ <style>
+  body { 
+  margin: 0px;
+  font-family: Arial, sans-serif;
+   
+ }
   
  .arrow {
- display: inline-block;
- width: 10px;
- height: 10px;
- border-top: 2px solid #333;
- border-right: 2px solid #333;
- transform: rotate(-130deg);
- position: absolute;
- top: 25px;
- left: 15px;
-}
-
-
-  
-  
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: white;
-    }
-
-    header {
-        background-color: #cc1;
-        color: black;
-        padding: 20px;
-        text-align: center;
-    }   
-
-    h1 {
-        margin: 0;
-        margin-top: 0px;
-        font-size: 22px;
-      
-      
-    }
-
-    #addCategory {
-        background-color: #cc2;
-        color: black;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        margin-left: 15px;
-        margin-top: 5px;
-        
-        font-size: 15px;
-        font-weight: bold;
-      
-    }
-
-    #addCategory:hover {
-        background-color: #cc2;
-      
-      
-      
-      
-    }
-
-  
-    #searchCategory {
-        padding: 12px;
-        margin-left: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-
-  
-  
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #333;
+  border-right: 2px solid #333;
+  transform: rotate(-130deg);
+  position: absolute;
+  top: 21px;
+  left: 15px;
  
-  
+ }
 
- 
+  #addCategory {
+  background-color: white;
+  color: Black;
+  padding: 12px 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 1px;
+  margin-top: 0px;
+  Margin-bottom: 0px;
+  margin-right: 10px;
+  font-size: 15px;
+  font-weight: bold;
+      
+ }
+
+  #addCategory:hover {
+  background-color: white;
+      
+ }
+
   
-  
-  
-   #categoriesContainer > div {
-       
-  border: 1px solid #ccc;
+  #categoriesContainer > div {
+  border: 1px solid #333;
   border-radius: 5px;
   position: center;
   flex-wrap: wrap;
   padding: 10px;
-  margin-top: 50px;
+  margin-top: 20px;
   background: white;
   border-radius: 5px;
-
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px px rgba(0, 0, 0, 0.2);
       
+ }
       
-      
-   }
-      
-      
-
-    
   #categoriesContainer > div h3 {
   font-size: 20px;
   padding: 5px;
@@ -119,145 +70,95 @@
   color: black;
   border-bottom: none px solid #cc1;
   
-}
+ }
 
-  
-  #categoriesContainer > div p {
-  font-size: 17px;
-  margin-top: 0px;
-  color: maroon;
+  input[type="number"] {
+  width: 40%;
+  margin-top: 1px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 35px;
+  margin-left: 0px;
+      
+ }
+
+ .delete-button {
+  color: #f00;
+  cursor: pointer;
+  font-size: 15px;
   font-weight: bold;
-  padding: 1px;
- 
-}
-
-    
-
-    input[type="number"] {
-        width: 40%;
-        margin-top: 1px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        margin-bottom: 35px;
-        margin-left: 0px;
+  margin-left: 10px;
       
-    }
+ }
 
-    .delete-button {
-        color: #f00;
-        cursor: pointer;
-         font-size: 15px;
-          font-weight: bold;
-          margin-left: 10px;
+ .delete-button:hover {
+  text-decoration: underline;
       
-    }
+ }
 
-    .delete-button:hover {
-        text-decoration: underline;
-      
-      
-      
-    }
-
-    button {
-        background-color: #cc2;
-        color: black;
-        padding: 10px 10px;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        margin-left: 180px;
-        font-size: 15px;
-        font-weight: bold;
-      
-      
-    }
-
-    button:hover {
-        background-color: #45a049;
-    }
-
-  
   label {
   margin: 0px;
   color: black;
   font-size: 17px;
   font-weight: bold;
-  
-}
+  margin-left: 5px;
+
+ }
 
 
-
-  
- 
-  
-  
- #categoriesContainer> div input[type="text"] {
-   padding: 10px;
-   width: 300px;
-   margin: 5px;
-  border: none;
+  #categoriesContainer> div input[type="text"] {
+  padding: 5px;
+  width: 320px;
+  margin: 5px;
+  border:none;
   border-radius: none;
   font-size: 16px;
   border-bottom: 1.50px solid #ccc;
   margin-bottom: 30px;
-   
+  color: Black;
+
  } 
   
-  </style>
+  header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background: #cc0;
 
+ }
+
+  h1 {
+  margin-right: 10px; /* Espaçamento entre o título e o botão */
+  color: Black;
+  margin-left: 60px;
+  font-size: 22px;
+
+ }
+
+  #addCategory {
+  float: right;
+ 
+ }
+
+ </style>
+ </head>
+ <body>  
   
-  <a href="index.html">
-<span class="arrow"></span>
+ <a href="index.html">
+ <span class="arrow"></span>
  </a>
-</div>
+ </div>
   
-  
-
-  
-  
+ <header>
+ <h1>Pregação</h1>
+ <button id="addCategory">Adicionar</button>
+ </header>
+ </div>
  
- 
-
-  
- 
-
-
-  
-  
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-    
-
-
-
-
-
-    <!DOCTYPE html>
-<html>
-<head>
-    <title>Estudantes</title>
-</head>
-<body>
-
-    <header>
-        <h1>Pregação</h1>
-    </header>
-
-    <button id="addCategory">Adicionar</button>
-    <input type="text" id="searchCategory" placeholder="Pesquisar por nome" oninput="searchCategories()">
-
-    <div id="categoriesContainer"></div>
-
+ <div id="categoriesContainer"></div>
+ </div>
     
   <script>
     const addButton = document.getElementById('addCategory');
@@ -407,9 +308,13 @@ function selecionarImagem(categoryName) {
 
   // Simular um clique no input de imagem para abrir o diálogo de seleção de arquivo
   imagemInput.click();
-}
+ }
 
 </script>
 </body>
 </html>
   
+
+
+
+
