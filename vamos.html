@@ -1,120 +1,103 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        .arrow {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-top: 2px solid black;
-            border-right: 2px solid black;
-            transform: rotate(-130deg);
-            position: absolute;
-            top: 25px;
-            left: 15px;
-        }
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Exemplo de Grid Flexível</title>
+ <link rel="stylesheet" href="styles.css">
+ </head>
+ <body>
+ 
+ <style>
+    
+ body {   
+ margin: 0px;
+ font-family: Arial, sans-serif;
 
-        * {
-            margin: 0;
-        }
+ }
+ 
+ .arrow {
+ display: inline-block;
+ width: 10px;
+ height: 10px;
+ border-top: 2px solid black;
+ border-right: 2px solid black;
+ transform: rotate(-130deg);
+ position: absolute;
+ top: 21px;
+ left: 15px;
+        
+ }
 
-        .header {
-            background-color: #cc3;
-            padding: 20px;
-            border-bottom: 1.50px solid White;
-        }
+ header {
+ background-color: #cc3;
+ padding: 15px;
+ border-bottom: 1.50px solid White;
+       
+ }
 
-        .header-title {
-            color: black;
-            text-align: center;
-            font-size: 22px;
-          
-        }
+ .title {
+ color: black;
+ text-align: center;
+ font-size: 22px;
+ font-weight: bold;       
+ 
+ }
 
-        form {
-            margin: 20px;
-        }
+ form {
+ margin: 20px;
+        
+ }
 
-        label {
-            display: inline-block;
-            width: 150px;
-            font-weight: bold;
-            color: black;
-            margin: 6px;
+ label {
+ display: inline-block;
+ width: 150px;
+ font-weight: bold;
+ color: black;
+ margin: 6px;
             
-          
-        }
+ }
 
-        input[type="text"] {
-            width: 200px;
-            padding: 14px;
-            margin-bottom: 6px;
-            border-radius: 10px;
-            border-color: orange;
-            font-size: 16px;
+ input[type="text"] {
+ width: 200px;
+ padding: 14px;
+ margin-bottom: 6px;
+ border-radius: 10px;
+ border: 1px solid #333;
+ font-size: 16px;
           
-        }
+ }
 
   
-         input {
-         color: black;
+ input {
+ color: Black;
          
-           
-         }
+ }
   
-  
-  
-  
-  
-  
-        button {
-            display: block;
-            margin: 10px auto;
-            padding: 10px 20px;
-            font-size: 16px;
-             font-weight: bold;
-            border-radius: 10px;
-            border: none;
-            cursor: pointer;
-            color: White;
-            background-color: orange;
-        }
-  
-  
-  input[type="number"] {
-  
-   width: 200px;
-   padding: 14px;
-   margin-bottom: 6px;
-   border-radius: 10px;
-   border-color: orange;
-   font-size: 16px;
-  
-  }
-    </style>
-</head>
+ </style>
+ </head>
+ <body>
+
+ <a href="index.html">
+ <span class="arrow"></span>
+ </a>
+ </div>
 
 
-<a href="index.html">
-<span class="arrow"></span>
-</a>
-</div>
-
-
-<div class="header">
-<h2 class="header-title">Limpeza do salão</h2>
-</div>
+ <header>
+ <div class="title">Limpeza do salão</div>
+ </header>
+ </div>
+ 
 <form>
-  
-<label for="nome">Dia de limpeza:</label>
-<input type="text" id="nome" name="nome"><br><br>
+ <label for="nome">Dia de limpeza:</label>
+ <input type="text" id="nome" name="nome"><br><br>
 
-<label for="data">Grupo:</label>
-<input type="text" id="data" name="data"><br><br>
-
+ <label for="data">Grupo:</label>
+ <input type="text" id="data" name="data"><br><br>
 </form>
 
-<script>
+ <script>
     // Carregar informações salvas no localStorage
     document.getElementById("nome").value = localStorage.getItem("nome") || "";
     document.getElementById("data").value = localStorage.getItem("data") || "";
@@ -132,11 +115,6 @@
         localStorage.setItem("texto", this.value);
     });
 
-    
-      
-      
-   
-</script>
+ </script>
 
-
-
+     
