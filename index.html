@@ -3,16 +3,199 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="stilize.css">
-</head>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ </head>
 <body>
+
+
+<style>
+body {
+ font-family: Arial, sans-serif;
+ margin: 0;
+ padding: 0;
+ background-color: white;
+}
+  
+ header {
+ background-color: #367;
+ padding: 5px;
+ align-items: center;
+ border-bottom: 1px solid none;
+ display: flex;
+}
+   
+ .text {
+ color:  black;
+ font-size: 22px;
+ font-weight: bold;
+ text-align: center;
+ margin-top: 30px;
+ margin-bottom: 30px;
+ margin-left: 20px;
+ margin-right: 20px;
+} 
+   
+ h1 {
+ 
+ flex: 1;
+ color: white;
+  font-size: 24px;
+}
+
+ img {
+ width: 50px;
+ margin-right: 15px;
+ height: 50px;
+ border-radius: 40px;
+ cursor: pointer;
+ margin-left: 10px;
+}
+  
+ .card {
+ display: inline-block;
+ margin-right: 100px; /* Para adicionar algum espaço entre os cards */
+}
+
+.card {
+ width: 150px;
+ height: 60px;
+ border: 1px solid none;
+ margin: 13.80px;
+ justify-content: center;
+ align-items: center;
+ cursor: pointer;
+ background-color: #cc1;
+ border-radius: 10px; 
+ transition: background-color 0.2s;
+  
+}  
+          
+ .card:hover {
+ background-color: none;
+   
+}
+
+.texto {
+ font-size: 16px;
+ text-align: center;
+ font-weight: bold;
+ color: black;
+ margin-top: 20px;
+  
+}
+  
+   
+
+
+
+
+
+
+
+
+.menu-container {
+ display: flex;
+ flex-direction: column; /* Stack menu items vertically */
+  
+ }
+
+ .headerlogo {
+ color: red;
+ font-size: 25px;
+ margin-left: 10px;
+ font-weight: bold; 
+   
+ }
+
+ #toggle-btn {
+ background-color: transparent;
+ border: none;
+ padding: 10px;
+ cursor: pointer;
+ color: silver;
+  font-size: 20px;
+ }
+
+ #sidebar {
+ background-color: white;
+ color: black; /* Alterado para preto para melhorar a visibilidade */
+ border-bottom: 1px solid none;
+ padding: 20px;
+ display: none; /* Inicialmente oculto */
+ position: absolute; /* Para sobrepor o restante do conteúdo */
+ top: 60px; /* Posicionado abaixo do cabeçalho */
+ left: 0px;
+ width: 88.80%;
+ z-index: 100; /* Sobrepor outros elementos */
+ border: 1px solid none; 
+ border-radius: none;
+ }
+
+ #sidebar ul {
+ list-style: none;
+ padding: 0;
+   
+ }
+
+ #sidebar li {
+ margin-bottom: 20px;
+      
+ }
+
+ li a {
+ color: Black;
+ font-size: 16px;
+ text-decoration: none; /* Remove o sublinhado dos links */
+ font-weight: none;
+ margin-top: 0px;
+
+ }
+
+ .opções {
+ color: #444;
+ margin-top: 0px;
+ font-size: 22px;
+ font-weight: bold;
+ text-align: center;
+ line-height: 1.3;
+ margin-left: 10px;
+ margin-right: 10px;
+ border-bottom: 1px solid none;
+ padding: 10px;
+    
+ }
+
+ </style>
+
+
+
+
 
 <div class="header-menu-container">
 <header>
 <input type="file" id="imagemInput" accept="image/*" style="display: none;">
 <img id="logo" src="" alt="foto" onclick="selecionarImagem()">
 <h1 id="headerText" onclick="habilitarEdicao()" contenteditable="true">Digite seu nome</h1>
+
+
+<div class="menu-container">
+ <button id="toggle-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+ <nav id="sidebar">
+ <div class="opções">Menu</div>
+ <ul>
+ <li><a href="login.html">Informações</a></li>
+ <li><a href="pagina inicial.html">Sair</a></li>
+ 
 </header>
+
+
+
+
+
+
+
 
 <div class="text">Vão e façam discipulos ensinando uns aos outros</div>
 
@@ -42,26 +225,101 @@
 </div>
 </div>
 
-<div class="menu">
-<ul>
-<a href="login.html">Informação</a>
-
-  
-  <a href="pagina inicial.html">Sair</a>
-</ul>
-</div>
-
 
 
 <script defer src="caminho.js"></script>
 </head>
 <body>
     
+<script>
+
+
+
+function redirecionar(url) {
+ window.location.href = url;
+}
+
+
+ 
+
+
+
+        // Função para habilitar a edição do cabeçalho
+        function habilitarEdicao() {
+            var header = document.getElementById("headerText");
+            header.focus();
+        }
+
+  
+  
+  
+  
+  
+        // Função para selecionar e exibir uma imagem
+        function selecionarImagem() {
+            var imagemInput = document.getElementById("imagemInput");
+            imagemInput.click();
+
+            imagemInput.addEventListener("change", function () {
+                var logo = document.getElementById("logo");
+                var file = imagemInput.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function () {
+                    logo.src = reader.result;
+                    // Salvar a imagem no armazenamento local
+                    localStorage.setItem("imagem", reader.result);
+                };
+
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Carregar imagem do armazenamento local ao carregar a página
+        var imagemSalva = localStorage.getItem("imagem");
+        if (imagemSalva) {
+            var logo = document.getElementById("logo");
+            logo.src = imagemSalva;
+        }
+
+  
+  
+  
+  
+  
+  
+  
+        // Restante do seu código JavaScript para salvar edições automaticamente
+        var headerText = document.getElementById("headerText");
+
+        headerText.addEventListener("input", function () {
+            // Salvar o texto do cabeçalho no armazenamento local
+            localStorage.setItem("cabecalho", headerText.textContent);
+        });
+
+        // Carregar texto do cabeçalho do armazenamento local ao carregar a página
+        var cabecalhoSalvo = localStorage.getItem("cabecalho");
+        if (cabecalhoSalvo) {
+            headerText.textContent = cabecalhoSalvo;
+        }
+    
+    
+</script>
+
+
+  <!-- javascript do menu -->
+ <script>
+ // JavaScript não é mais necessário para exibir/ocultar o menu
+ function toggleMenu() {
+ const sidebar = document.getElementById('sidebar');
+ sidebar.style.display = (sidebar.style.display === 'block') ? 'none' : 'block';
+ }
+</script>
 </body>
 </html>
   
-
-
 
 
 
