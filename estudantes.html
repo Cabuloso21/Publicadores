@@ -100,16 +100,21 @@ async function buscarDados() {
       const item = document.createElement("div");
       item.textContent = nome;
       item.style.cssText = `
-        background: #111;
-        color: lime;
-        border: 2px solid lime;
+        background: #f2f2f2;
+        color: #456;
+        border: 1px solid white;
         border-radius: 10px;
         padding: 12px;
         margin: 8px 0;
         cursor: pointer;
         font-family: Arial, sans-serif;
-        transition: 0.3s;
-      `;
+   border-left: 5px solid #3498db;
+ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+ cursor: pointer;
+ transition: transform 0.2s, box-shadow 0.2s;
+      
+  
+  `;
       item.onmouseover = () => item.style.background = "#222";
       item.onmouseout = () => item.style.background = "#111";
 
