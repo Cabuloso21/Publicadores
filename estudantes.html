@@ -115,7 +115,7 @@ async function buscarDados() {
 
       // 🔹 Sempre abre nova aba com URL absoluta e nome correto da página
       const baseUrl = `${window.location.origin}${window.location.pathname.replace(/[^\/]*$/, '')}`;
-      const url = `${baseUrl}estudantes (1).html?id=${docSnap.id}`;
+      const url = `${baseUrl}revisitas.html?id=${docSnap.id}`;
       item.addEventListener("click", () => window.open(url, "_blank"));
 
       container.appendChild(item);
