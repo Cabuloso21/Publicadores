@@ -1,228 +1,134 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Estudantes</title>
-</head>
-<body>
-  
-<style>
- 
- .arrow {
- display: inline-block;
- width: 10px;
- height: 10px;
- border-top: 2px solid black;
- border-right: 2px solid black;
- transform: rotate(-130deg);
- position: absolute;
- top: 25px;
- left: 15px;
-}
 
+<div id="detalhes" style="font-family: sans-serif; padding: 20px;">Carregando detalhes...</div>
 
-  
-  
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: white;
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import { getFirestore, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCWH18dhHz0EBY5Ycc4wjZ1H6AlO-51sho",
+  authDomain: "teste1-66092.firebaseapp.com",
+  projectId: "teste1-66092",
+  storageBucket: "teste1-66092.firebasestorage.app",
+  messagingSenderId: "517435649522",
+  appId: "1:517435649522:web:a6826c13b1e2c5062acf6b",
+  measurementId: "G-3GVBBV8W7C"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const container = document.getElementById("detalhes");
+const colecao = "Dados estud";
+
+// 🔹 Lê o ID do documento da URL
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+async function carregarDetalhes() {
+  if (!id) {
+    container.innerHTML = "<p>ID do documento não encontrado.</p>";
+    return;
+  }
+
+  try {
+    const docRef = doc(db, colecao, id);
+    const docSnap = await getDoc(docRef);
+
+    if (!docSnap.exists()) {
+      container.innerHTML = "<p>Documento não encontrado.</p>";
+      return;
     }
 
-    header {
-        background-color: #cc1;
+    const dados = docSnap.data();
+
+    container.innerHTML = `
+      <div style="
+        border: 2px solid lime;
+        border-radius: 12px;
+        background: #111;
+        color: white;
         padding: 20px;
-        text-align: center;
-    }   
+        max-width: 500px;
+        margin: auto;
+      ">
+        <h2 style="color: lime; text-align: center;">📄 Detalhes do Registro</h2>
+        <hr style="border:1px solid lime;margin:10px 0;">
+        <div>
+          <p><strong>Nome:</strong> <span id="campo-nome">${dados.Nome || ""}</span></p>
+          <p><strong>Livro de estudo:</strong> <span id="campo-livro">${dados["Livro de estudo"] || ""}</span></p>
+          <p><strong>Capítulo:</strong> <span id="campo-capitulo">${dados.Capítulo || ""}</span></p>
+          <p><strong>Lição:</strong> <span id="campo-licao">${dados.Lição || ""}</span></p>
+        </div>
+        <br>
+        <button id="editar" style="background: orange; color: black; font-weight:bold; border:none; border-radius:8px; padding:10px 16px; cursor:pointer; margin-right:8px;">✏️ Editar</button>
+        <button id="salvar" style="background: lime; color:black; font-weight:bold; border:none; border-radius:8px; padding:10px 16px; cursor:pointer; margin-right:8px; display:none;">💾 Salvar alterações</button>
+        <button id="excluir" style="background:red;color:white;font-weight:bold;border:none;border-radius:8px;padding:10px 16px; cursor:pointer;">🗑️ Excluir</button>
+      </div>
+    `;
 
-    h1 {
-        margin: 0;
-        margin-top: 0px;
-        font-size: 22px;
-        color: black;
-      
-    }
+    const btnEditar = document.getElementById("editar");
+    const btnSalvar = document.getElementById("salvar");
+    const btnExcluir = document.getElementById("excluir");
 
-    #addCategory {
-        background-color: #cc2;
-        color: black;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        margin-left: 15px;
-        margin-top: 5px;
-        
-        font-size: 15px;
-        font-weight: bold;
-      
-    }
+    btnEditar.addEventListener("click", () => ativarEdicao());
+    btnSalvar.addEventListener("click", () => salvarEdicao());
+    btnExcluir.addEventListener("click", () => excluirDocumento());
 
-    #addCategory:hover {
-        background-color: #cc2;
-      
-      
-      
-      
-    }
-
-  
-    #searchCategory {
-        padding: 12px;
-        margin-left: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-
-  
-  
- 
-  
-
- 
-  
-  
-  
-   #categoriesContainer > div {
-       
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  position: center;
-  flex-wrap: wrap;
-  padding: 10px;
-  margin-top: 50px;
-  background: white;
-  border-radius: 5px;
-
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-      
-      
-      
-   }
-      
-      
-
-    
-  #categoriesContainer > div h3 {
-  font-size: 22px;
-  padding: 5px;
-  margin-top: 1px;
-  color: black;
-  border-bottom: none px solid #cc1;
-  
+  } catch (erro) {
+    container.innerHTML = `<p style="color:red;">Erro ao carregar detalhes: ${erro.message}</p>`;
+  }
 }
 
-  
-  #categoriesContainer > div p {
-  font-size: 17px;
-  margin-top: 0px;
-  color: black;
-  font-weight: bold;
-  padding: 1px;
- 
+// Editar campos
+function ativarEdicao() {
+  ["nome","livro","capitulo","licao"].forEach(c => {
+    const span = document.getElementById(`campo-${c}`);
+    const input = document.createElement("input");
+    input.id = `input-${c}`;
+    input.value = span.textContent;
+    input.style.width = "100%";
+    input.style.padding = "6px";
+    input.style.margin = "4px 0";
+    input.style.borderRadius = "4px";
+    span.replaceWith(input);
+  });
+
+  document.getElementById("editar").style.display = "none";
+  document.getElementById("salvar").style.display = "inline-block";
 }
 
-    
+// Salvar edição
+async function salvarEdicao() {
+  const novosDados = {
+    Nome: document.getElementById("input-nome").value,
+    "Livro de estudo": document.getElementById("input-livro").value,
+    Capítulo: document.getElementById("input-capitulo").value,
+    Lição: document.getElementById("input-licao").value
+  };
 
-    input[type="number"] {
-        width: 40%;
-        margin-top: 1px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        margin-bottom: 35px;
-        margin-left: 0px;
-        
-    }
-
-    .delete-button {
-        color: #f00;
-        cursor: pointer;
-         font-size: 15px;
-          font-weight: bold;
-          margin-left: 10px;
-      
-    }
-
-    .delete-button:hover {
-        text-decoration: underline;
-      
-      
-      
-    }
-
-    button {
-        background-color: #cc2;
-        color: black;
-        padding: 10px 10px;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        margin-left: 180px;
-        font-size: 15px;
-        font-weight: bold;
-      margin-bottom: 10px;
-      
-    }
-
-    button:hover {
-        background-color: none;
-    }
-
-  
-  label {
-  margin: 10px;
-  color: black;
-  font-size: 17px;
-  font-weight: bold;
-  
+  try {
+    await updateDoc(doc(db, colecao, id), novosDados);
+    alert("✅ Dados atualizados com sucesso!");
+    carregarDetalhes();
+  } catch (erro) {
+    alert("❌ Erro ao atualizar: " + erro.message);
+  }
 }
 
+// Excluir documento
+async function excluirDocumento() {
+  if (!confirm("Tem certeza que deseja excluir este registro?")) return;
 
+  try {
+    await deleteDoc(doc(db, colecao, id));
+    alert("✅ Documento excluído com sucesso!");
+    window.close();
+  } catch (erro) {
+    alert("❌ Erro ao excluir: " + erro.message);
+  }
+}
 
-  
- 
-  
-  
- #categoriesContainer> div input[type="text"] {
-   padding: 10px;
-   width: 300px;
-   margin: 5px;
-  border: none;
-  border-radius: none;
-  font-size: 16px;
-  border-bottom: 1.50px solid #ccc;
-  margin-bottom: 30px;
-   
- } 
-  
-</style>
+carregarDetalhes();
+</script>
 
-  
-<a href="index.html">
-<span class="arrow"></span>
-</a>
-</div>
-  
-<header>
-<h1>Meus estudantes</h1>
-</header>
-
-<script defer src="estudante.js"></script>
-</head>
-<body>
-
-<button id="addCategory">Adicionar</button>
-<input type="text" id="searchCategory" placeholder="Pesquisar estudante" oninput="searchCategories()">
-    
-<div id="categoriesContainer"></div>
-
-  
-  
-  
-  
-
-
-
-
- 
