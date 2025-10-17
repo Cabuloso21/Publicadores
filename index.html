@@ -1,18 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>hhhhh</title>
+<title>Formulário estudante</title>
 </head>
 <body>
- <style>
+  
+  <style>
   /* 🔹 Zera margens e paddings globais */
   html, body {
     margin: 0;
    width: 100%;
   }
 </style>
+  
+
 <div id="container"></div>
 <div id="rodapeContainer"></div>
 <div id="mensagem"></div>
@@ -84,7 +88,7 @@ function aplicarEstilos(elemento, estilos){
 
       case "largura":
         elemento.style.width = (valor.includes("%") || valor.includes("px") || valor === "auto") ? valor : valor + "px";
-        if(valor === "100%"){
+        if(valor === "0%"){
           elemento.style.marginLeft = "0";
           elemento.style.marginRight = "0";
           elemento.style.display = "block";
@@ -136,7 +140,7 @@ function interpretarCodigo(codigo, estiloMap){
 
   const blocoContainer = document.createElement("div");
   blocoContainer.classList.add("conteudo-gerada");
-  blocoContainer.style.width = "100%";
+  blocoContainer.style.width = "92.30%";
   blocoContainer.style.margin = "0";
   blocoContainer.style.padding = "0";
 
@@ -194,7 +198,7 @@ function interpretarCodigo(codigo, estiloMap){
       input.placeholder = placeholder;
       input.required = obrigatorio;
       input.name = nomeCampo;
-      input.style.width = "100%";
+      input.style.width = "0%";
       if(estiloMap["input"]) aplicarEstilos(input, estiloMap["input"]);
 
       fieldWrapper.appendChild(label);
