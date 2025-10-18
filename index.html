@@ -1,48 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Formulário estudante</title>
+<title>detalhes</title>
 </head>
 <body>
-  
-  <style>
+
+<style>
   /* 🔹 Zera margens e paddings globais */
-  html, body {
-    margin: 0;
-   width: 100%;
-  }
-
-  
-      
- 
-  .arrow {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-top: 2px solid orange;
-  border-right: 2px solid orange;
-  transform: rotate(-130deg);
-  position: absolute;
-  top: 24px;
-  left: 15px;
+ html, body {
+ margin: 0;
+ width: 100%;
 }
- </style>
- 
-<a href="estudantes.html">
- <span class="arrow"></span>
- </a>
- </div>
-</div>
-
-
-
-
-
+</style>
   
-
 <div id="container"></div>
 <div id="rodapeContainer"></div>
 <div id="mensagem"></div>
@@ -73,70 +45,31 @@ const paginas = ["Formu estudante"];
 
 // 🔹 Função para aplicar estilos
 function aplicarEstilos(elemento, estilos){
-  estilos.forEach(linha => {
-    const [chave, valor] = linha.replace(/[{}]/g, "").split(":").map(s => s.trim());
+  estilos.forEach(linha=>{
+    const [chave, valor] = linha.replace(/[{}]/g,"").split(":").map(s=>s.trim());
     if(!chave || !valor) return;
-
     switch(chave.toLowerCase()){
-      case "cor":
-        elemento.style.color = valor;
-        break;
-
-      case "cor-fundo":
-        elemento.style.backgroundColor = valor;
-        break;
-
-      case "tamanho":
-        elemento.style.fontSize = valor + "px";
-        break;
-
-      case "fonte":
-        if(valor.toLowerCase() === "negrito") elemento.style.fontWeight = "bold";
-        break;
-
-      case "espaço-top":
-        elemento.style.marginTop = valor + "px";
-        break;
-
+      case "cor": elemento.style.color = valor; break;
+      case "cor-fundo": elemento.style.backgroundColor = valor; break;
+      case "tamanho": elemento.style.fontSize = valor+"px"; break;
+      case "fonte": if(valor.toLowerCase()==="negrito") elemento.style.fontWeight="bold"; break;
+      case "espaço-top": elemento.style.marginTop=valor+"px"; break;
       case "posição":
-        if(valor.toLowerCase() === "centro") elemento.style.textAlign = "center";
-        else if(valor.toLowerCase() === "direita") elemento.style.textAlign = "right";
-        else elemento.style.textAlign = "left";
+        if(valor.toLowerCase()==="centro") elemento.style.textAlign="center";
+        else if(valor.toLowerCase()==="direita") elemento.style.textAlign="right";
+        else elemento.style.textAlign="left";
         break;
-
-      case "padding":
-        elemento.style.padding = valor + "px";
+      case "padding": elemento.style.padding=valor+"px"; break;
+      case "borda": elemento.style.borderRadius=valor+"px"; break;
+      case "largura": 
+        elemento.style.width = (valor.includes("%") || valor.includes("px") || valor==="auto")?valor:valor+"px";
+        if(valor==="0%"){ elemento.style.marginLeft="0"; elemento.style.marginRight="0"; elemento.style.display="block"; }
         break;
-
-      case "borda":
-        elemento.style.borderRadius = valor + "px";
-        break;
-
-      case "largura":
-        elemento.style.width = (valor.includes("%") || valor.includes("px") || valor === "auto") ? valor : valor + "px";
-        if(valor === "0%"){
-          elemento.style.marginLeft = "0";
-          elemento.style.marginRight = "0";
-          elemento.style.display = "block";
-        }
-        break;
-
-      case "margin-left":
-        elemento.style.marginLeft = valor + "px";
-        break;
-
-      case "margin-right":
-        elemento.style.marginRight = valor + "px";
-        break;
-
+      case "margin-left": elemento.style.marginLeft=valor+"px"; break;
+      case "margin-right": elemento.style.marginRight=valor+"px"; break;
       case "borda-solid":
-        elemento.style.borderStyle = "solid";
-        elemento.style.borderWidth = "1px";
-        elemento.style.borderColor = valor;
-        break;
-
-      default:
-        break;
+        elemento.style.borderStyle="solid"; elemento.style.borderWidth="1px"; elemento.style.borderColor=valor; break;
+      default: break;
     }
   });
 }
@@ -146,14 +79,14 @@ function processarEstilos(codigo){
   const estiloMap = {};
   const styloRegex = /\[stylo\]([\s\S]*?)\[stylo\]/gi;
   let styloMatch;
-  while((styloMatch = styloRegex.exec(codigo)) !== null){
+  while((styloMatch = styloRegex.exec(codigo))!==null){
     const bloco = styloMatch[1];
-    ["logo","titulo","subtitulo","texto","formulário","nome","input","rodape","botão"].forEach(el => {
-      const regex = new RegExp(`\\[${el}\\]([\\s\\S]*?)\\[${el}\\]`, "gi");
+    ["logo","titulo","subtitulo","texto","formulário","nome","input","rodape","botão"].forEach(el=>{
+      const regex = new RegExp(`\\[${el}\\]([\\s\\S]*?)\\[${el}\\]`,"gi");
       let matchEl;
-      while((matchEl = regex.exec(bloco)) !== null){
-        const linhas = matchEl[1].split("\n").map(l => l.trim()).filter(l => l.startsWith("{"));
-        estiloMap[el] = linhas;
+      while((matchEl = regex.exec(bloco))!==null){
+        const linhas = matchEl[1].split("\n").map(l=>l.trim()).filter(l=>l.startsWith("{"));
+        estiloMap[el]=linhas;
       }
     });
   }
@@ -162,28 +95,27 @@ function processarEstilos(codigo){
 
 // 🔹 Interpreta o código Lopixecodin
 function interpretarCodigo(codigo, estiloMap){
-  codigo = codigo.replace(/\[stylo\][\s\S]*?\[stylo\]/gi,""); // remove [stylo]
+  codigo = codigo.replace(/\[stylo\][\s\S]*?\[stylo\]/gi,"");
 
   const blocoContainer = document.createElement("div");
   blocoContainer.classList.add("conteudo-gerada");
-  blocoContainer.style.width = "92.30%";
-  blocoContainer.style.margin = "0";
-  blocoContainer.style.padding = "0";
+  blocoContainer.style.width="92.30%";
+  blocoContainer.style.margin="0";
+  blocoContainer.style.padding="0";
 
-  // 🔹 Texto simples: logo, titulo, subtitulo, texto
+  // 🔹 Texto simples
   const blocos = [
-    { regex: /\[logo\]([\s\S]*?)\[logo\]/gi, tag:"h1", key:"logo" },
-    { regex: /\[titulo\]([\s\S]*?)\[titulo\]/gi, tag:"h2", key:"titulo" },
-    { regex: /\[subtitulo\]([\s\S]*?)\[subtitulo\]/gi, tag:"h3", key:"subtitulo" },
-    { regex: /\[texto\]([\s\S]*?)\[texto\]/gi, tag:"p", key:"texto" }
+    { regex:/\[logo\]([\s\S]*?)\[logo\]/gi, tag:"h1", key:"logo" },
+    { regex:/\[titulo\]([\s\S]*?)\[titulo\]/gi, tag:"h2", key:"titulo" },
+    { regex:/\[subtitulo\]([\s\S]*?)\[subtitulo\]/gi, tag:"h3", key:"subtitulo" },
+    { regex:/\[texto\]([\s\S]*?)\[texto\]/gi, tag:"p", key:"texto" }
   ];
-
   for(const bloco of blocos){
     let match;
-    while((match = bloco.regex.exec(codigo)) !== null){
-      const el = document.createElement(bloco.tag);
-      el.textContent = match[1].trim();
-      el.style.margin = "0";
+    while((match=bloco.regex.exec(codigo))!==null){
+      const el=document.createElement(bloco.tag);
+      el.textContent=match[1].trim();
+      el.style.margin="0";
       if(estiloMap[bloco.key]) aplicarEstilos(el, estiloMap[bloco.key]);
       blocoContainer.appendChild(el);
     }
@@ -192,31 +124,28 @@ function interpretarCodigo(codigo, estiloMap){
   // 🔹 Formulário
   const formRegex = /\[formulário\]([\s\S]*?)\[formulário\]/gi;
   let matchForm;
-  while((matchForm = formRegex.exec(codigo)) !== null){
-    const linhas = matchForm[1].trim()
-      .split("\n")
-      .map(l => l.trim())
-      .filter(l => l && !l.startsWith("{"));
-    const form = document.createElement("form");
-    form.style.margin = "0";
+  while((matchForm = formRegex.exec(codigo))!==null){
+    const linhas = matchForm[1].trim().split("\n").map(l=>l.trim()).filter(l=>l && !l.startsWith("{"));
+    const form=document.createElement("form");
+    form.style.margin="0";
     if(estiloMap["formulário"]) aplicarEstilos(form, estiloMap["formulário"]);
 
-    for(let i = 0; i < linhas.length; i += 3){
+    for(let i=0;i<linhas.length;i+=3){
       const nomeCampo = linhas[i]?.replace(/\[:|:\]/g,"");
       const inputLinha = linhas[i+1];
       const tipoLinha = linhas[i+2];
       if(!nomeCampo || !inputLinha || !tipoLinha) continue;
 
       const fieldWrapper = document.createElement("div");
-      fieldWrapper.style.display = "flex";
-      fieldWrapper.style.flexDirection = "column";
-      fieldWrapper.style.marginBottom = "10px";
+      fieldWrapper.style.display="flex";
+      fieldWrapper.style.flexDirection="column";
+      fieldWrapper.style.marginBottom="10px";
 
-      const label = document.createElement("label");
-      label.textContent = nomeCampo;
+      const label=document.createElement("label");
+      label.textContent=nomeCampo;
       if(estiloMap["nome"]) aplicarEstilos(label, estiloMap["nome"]);
 
-      const input = document.createElement("input");
+      const input=document.createElement("input");
       const placeholder = (inputLinha.match(/\[:input:(.*?)\]/i)?.[1]||"").trim();
       const obrigatorio = inputLinha.includes("[Ação:obrigatório]");
       const tipo = (tipoLinha.match(/\[:tipo-(.*?)\]/i)?.[1]||"text").trim();
@@ -224,21 +153,31 @@ function interpretarCodigo(codigo, estiloMap){
       input.placeholder = placeholder;
       input.required = obrigatorio;
       input.name = nomeCampo;
-      input.style.width = "0%";
+      input.style.width="0%";
       if(estiloMap["input"]) aplicarEstilos(input, estiloMap["input"]);
+
+      const msgErro = document.createElement("small");
+      msgErro.style.color="red";
+      msgErro.style.display="none";
+      msgErro.style.marginTop="3px";
+
+      input.addEventListener("input", ()=>{
+        if(input.value.trim()!=="") msgErro.style.display="none";
+      });
 
       fieldWrapper.appendChild(label);
       fieldWrapper.appendChild(input);
+      fieldWrapper.appendChild(msgErro);
       form.appendChild(fieldWrapper);
     }
 
     blocoContainer.appendChild(form);
   }
 
-  // 🔹 Função do botão
+  // 🔹 Botão de salvar
   const funcRegex = /\[função\]([\s\S]*?)\[função\]/gi;
   let funcMatch;
-  while((funcMatch = funcRegex.exec(codigo)) !== null){
+  while((funcMatch = funcRegex.exec(codigo))!==null){
     const blocoFunc = funcMatch[1];
     const btnMatch = blocoFunc.match(/\[botão-publicar:\s*(.*?)\]/i);
     const colecaoMatch = blocoFunc.match(/\[coleção__(.*?)\]/i);
@@ -249,26 +188,40 @@ function interpretarCodigo(codigo, estiloMap){
     const colecaoNome = colecaoMatch? colecaoMatch[1].trim():"Dados";
     const mensagemSucesso = msgMatch? msgMatch[1].trim():"Dados salvos com sucesso!";
 
-    const btn = document.createElement("button");
+    const btn=document.createElement("button");
     btn.type="button";
-    btn.textContent = textoBotao;
+    btn.textContent=textoBotao;
     btn.style.display="block";
     btn.style.marginTop="10px";
 
-    // 🔹 Aplica estilos do [botão] se existir
     if(estiloMap["botão"]) aplicarEstilos(btn, estiloMap["botão"]);
 
     btn.addEventListener("click", async ()=>{
       const form = blocoContainer.querySelector("form");
       if(!form) return;
-      const dados = {};
-      form.querySelectorAll("input").forEach(inp => dados[inp.name] = inp.value);
+
+      const inputs = form.querySelectorAll("input");
+      let valido = true;
+      inputs.forEach(input=>{
+        const msgErro = input.nextElementSibling;
+        if(input.required && !input.value.trim()){
+          msgErro.textContent = "⚠️ obrigatório";
+          msgErro.style.display = "block";
+          valido=false;
+        } else if(msgErro) msgErro.style.display="none";
+      });
+      if(!valido) return;
+
+      const dados={};
+      inputs.forEach(inp=>dados[inp.name]=inp.value);
+
       try{
-        const id = "doc_"+Date.now();
+        const id="doc_"+Date.now();
         await setDoc(doc(db, colecaoNome, id), {...dados, criadoEm: serverTimestamp()});
         msgDiv.style.color="green";
         msgDiv.textContent="✅ "+mensagemSucesso;
         form.reset();
+        form.querySelectorAll("small").forEach(sm=>sm.style.display="none");
         setTimeout(()=>msgDiv.textContent="",3000);
       }catch(err){
         msgDiv.style.color="red";
@@ -287,9 +240,9 @@ function renderRodape(codigo, estiloMap){
   rodapeContainer.innerHTML="";
   const rodapeRegex = /\[rodape\]([\s\S]*?)\[rodape\]/gi;
   let match;
-  while((match = rodapeRegex.exec(codigo)) !== null){
+  while((match=rodapeRegex.exec(codigo))!==null){
     const rodapeEl = document.createElement("div");
-    const textoLimpo = match[1].split("\n").map(l => l.trim()).filter(l => !l.startsWith("{")).join("\n");
+    const textoLimpo = match[1].split("\n").map(l=>l.trim()).filter(l=>!l.startsWith("{")).join("\n");
     rodapeEl.textContent = textoLimpo;
     if(estiloMap["rodape"]) aplicarEstilos(rodapeEl, estiloMap["rodape"]);
     rodapeContainer.appendChild(rodapeEl);
@@ -301,9 +254,9 @@ function carregarPaginas(){
   container.innerHTML="";
   for(const nome of paginas){
     const colecaoRef = collection(db, nome);
-    onSnapshot(colecaoRef, snapshot => {
+    onSnapshot(colecaoRef, snapshot=>{
       container.innerHTML="";
-      snapshot.forEach(docSnap => {
+      snapshot.forEach(docSnap=>{
         const dados = docSnap.data();
         const codigo = dados.conteudo || dados.codigo || "";
         const estiloMap = processarEstilos(codigo);
@@ -317,4 +270,5 @@ function carregarPaginas(){
 
 carregarPaginas();
 </script>
+
 
